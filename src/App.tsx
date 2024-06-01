@@ -46,7 +46,7 @@ const App = () => {
       cacheTime: Infinity,
     }
   );
-
+  const handleCloseCart = () => setCartOpen(false); // onClose işlevi
   const getTotalItems = (items: CartItemType[]) => {
     return items.reduce((ack: number, item) => ack + item.amount, 0);
   };
@@ -92,6 +92,7 @@ const App = () => {
           cartItems={cartItems}
           addToCart={handleAddToCart}
           removeFromCart={handleRemoveFromCart}
+          onClose={handleCloseCart} 
         />
       </Drawer>
       <StyledButton onClick={() => setCartOpen(true)}>

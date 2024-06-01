@@ -2,7 +2,7 @@ import React from "react";
 import CartItem from "../CartItem/CartItem";
 
 //Styles
-import { Wrapper } from "./Cart.style";
+import { Wrapper, CloseButton } from "./Cart.style";
 
 //Types
 import { CartItemType } from "../App";
@@ -11,13 +11,23 @@ type Props = {
   cartItems: CartItemType[];
   addToCart: (clickedItem: CartItemType) => void;
   removeFromCart: (id: number) => void;
+  onClose: () => void;
 };
-const Cart: React.FC<Props> = ({ cartItems, addToCart, removeFromCart }) => {
+const Cart: React.FC<Props> = ({
+  cartItems,
+  addToCart,
+  removeFromCart,
+  onClose,
+}) => {
   const calculateTotal = (items: CartItemType[]) => {
-   return  items.reduce((ack: number, item) => ack + item.amount * item.price, 0);
+    return items.reduce(
+      (ack: number, item) => ack + item.amount * item.price,
+      0
+    );
   };
   return (
     <Wrapper>
+      <CloseButton onClick={() => onClose()}>Close Cart</CloseButton>{" "}
       <h2>Your Shopping Cart</h2>
       {cartItems.length === 0 ? <p>No items in The Cart</p> : null}
       {cartItems.map((item) => (
